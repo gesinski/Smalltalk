@@ -1,232 +1,248 @@
-Object subclass: #Wielokat
-	instanceVariableNames: 'wierzcholki nazwa '
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'JezykiProgramowania'!
+    Object subclass: #Wielokat
+        instanceVariableNames: 'wierzcholki nazwa '
+        classVariableNames: ''
+        poolDictionaries: ''
+        category: 'JezykiProgramowania'!
 
-!Wielokat methodsFor: 'initialize-release'!
+    !Wielokat methodsFor: 'initialize-release'!
 
-initialize: liczbaWierzcholkow name: nowaNazwa
-	"konstruktor obiektu - wielokata"
+    initialize: liczbaWierzcholkow name: nowaNazwa
+        "konstruktor obiektu - wielokata"
 
-	nazwa:=nowaNazwa.
-	wierzcholki:=Array new: liczbaWierzcholkow.
-	wierzcholki at: 1 put: 0@0.! !
+        nazwa:=nowaNazwa.
+        wierzcholki:=Array new: liczbaWierzcholkow.
+        wierzcholki at: 1 put: 0@0.! !
 
-!Wielokat methodsFor: 'accessing'!
-drukuj
-	"podaje wierzcholki i pole wielokata"
-	"TODO wyswietlanie wysrodkuj"
-	Transcript show: 'Nazwa wielokata: ', nazwa printString; cr.
-	Transcript show: 'Pole wielokata: ', (self pole) printString; cr.
-	1 to: wierzcholki size do: [:i |
-        Transcript show: 'Wierzcholek nr ', i printString, ': ', (wierzcholki at: i) printString; cr.
-    ].!
+    !Wielokat methodsFor: 'accessing'!
+    drukuj
+        "podaje wierzcholki i pole wielokata"
+        "TODO wyswietlanie wysrodkuj"
+        Transcript show: 'Nazwa wielokata: ', nazwa printString; cr.
+        Transcript show: 'Pole wielokata: ', (self pole) printString; cr.
+        1 to: wierzcholki size do: [:i |
+            Transcript show: 'Wierzcholek nr ', i printString, ': ', (wierzcholki at: i) printString; cr.
+        ].!
 
-nazwa
-	"podaje nazwe wielokata"
+    nazwa
+        "podaje nazwe wielokata"
 
-	^nazwa!
+        ^nazwa!
 
-nazwa: nowa_nazwa
-	"ustawia nowa nazwe wielokata"
+    nazwa: nowa_nazwa
+        "ustawia nowa nazwe wielokata"
 
-	nazwa:=nowa_nazwa! !
+        nazwa:=nowa_nazwa! !
 
 
 
-Wielokat subclass: #Kwadrat
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'JezykiProgramowania'!
+    Wielokat subclass: #Kwadrat
+        instanceVariableNames: ''
+        classVariableNames: ''
+        poolDictionaries: ''
+        category: 'JezykiProgramowania'!
 
 
-!Kwadrat methodsFor: 'arithmetic'!
+    !Kwadrat methodsFor: 'arithmetic'!
 
-+ figura
-	"dodaj 2 figury w sensie pola"
+    + figura
+        "dodaj 2 figury w sensie pola"
 
-	| p |
+        | p |
 
-	p:=self pole + figura pole.
-	^(Kwadrat new) initialize: p sqrt! !
+        p:=self pole + figura pole.
+        ^(Kwadrat new) initialize: p sqrt! !
 
-!Kwadrat methodsFor: 'actions'!
+    !Kwadrat methodsFor: 'actions'!
 
-pole
-	"licz pole kwadratu"
+    pole
+        "licz pole kwadratu"
 
-    | x y z |
-    x := ((wierzcholki at: 2) x) asFloat.
-    y := ((wierzcholki at: 1) x) asFloat.
-    z := (x - y) abs.
-    ^ z squared.
-!
-wysrodkuj
-    "przenosi figure do srodka ukladu wspolrzednych"
-    | polBoku x |
-    x := ((wierzcholki at: 2) x) asFloat.
-    polBoku := (x / 2.0) asFloat.
+        | x y z |
+        x := ((wierzcholki at: 2) x) asFloat.
+        y := ((wierzcholki at: 1) x) asFloat.
+        z := (x - y) abs.
+        ^ z squared.
+    !
+    wysrodkuj
+        "przenosi figure do srodka ukladu wspolrzednych"
+        | polBoku x |
+        x := ((wierzcholki at: 2) x) asFloat.
+        polBoku := (x / 2.0) asFloat.
 
-    wierzcholki at: 1 put: ((polBoku)*(-1) @ (polBoku)*(-1)).
-    wierzcholki at: 2 put: (polBoku @ (polBoku)*(-1)).
-    wierzcholki at: 3 put: (polBoku @ polBoku).
-    wierzcholki at: 4 put: ((polBoku)*(-1) @ polBoku).
-! !
+        wierzcholki at: 1 put: ((polBoku)*(-1) @ (polBoku)*(-1)).
+        wierzcholki at: 2 put: (polBoku @ (polBoku)*(-1)).
+        wierzcholki at: 3 put: (polBoku @ polBoku).
+        wierzcholki at: 4 put: ((polBoku)*(-1) @ polBoku).
+    !
 
+        opiszOkrag
+        "Opisuje Okrag"
+        | srodekOkrag okrag |
+        
+        srodekOkrag := ((wierzcholki at: 1) + (wierzcholki at: 3)) / 2.
+        okrag := Okrag new initialize: (self pole) srodek: srodekOkrag.
+        okrag drukuj.
+    ! !
 
-!Kwadrat methodsFor: 'initialize-release'!
 
-initialize: bok
-	"tworz kwadrat o podanym boku"
+    !Kwadrat methodsFor: 'initialize-release'!
 
-	super initialize: 4 name: 'Kwadrat'.
-	wierzcholki at: 2 put: bok@0.
-	wierzcholki at: 3 put: bok@bok.
-	wierzcholki at: 4 put: 0@bok.! !
+    initialize: bok
+        "tworz kwadrat o podanym boku"
 
+        super initialize: 4 name: 'Kwadrat'.
+        wierzcholki at: 2 put: bok@0.
+        wierzcholki at: 3 put: bok@bok.
+        wierzcholki at: 4 put: 0@bok.! !
 
 
-Wielokat subclass: #Romb
-    instanceVariableNames: 'bok kat'
-    classVariableNames: ''
-    poolDictionaries: ''
-    category: 'JezykiProgramowania'!
 
-!Romb methodsFor: 'arithmetic'!
+    Wielokat subclass: #Romb
+        instanceVariableNames: 'bok kat'
+        classVariableNames: ''
+        poolDictionaries: ''
+        category: 'JezykiProgramowania'!
 
-+ figura
-    "dodaj 2 figury w sensie pola"
+    !Romb methodsFor: 'arithmetic'!
 
-    | p |
-    p := self pole + figura pole.
-    ^(Romb new) initialize: (p / (kat sin)) sqrt kat: kat! !
+    + figura
+        "dodaj 2 figury w sensie pola"
 
-!Romb methodsFor: 'actions'!
+        | p |
+        p := self pole + figura pole.
+        ^(Romb new) initialize: (p / (kat sin)) sqrt kat: kat! !
 
-pole
-    "licz pole rombu"
-    | x y z |
-    x := (wierzcholki at: 2) x.
-    y := (wierzcholki at: 1) x.
-    z := ((x - y) abs) asFloat.
-    ^(z squared) * (kat sin).! 
+    !Romb methodsFor: 'actions'!
 
-wysrodkuj
-    | srodekX srodekY przesuniecieX przesuniecieY |
-    
-    srodekX := (((wierzcholki at: 1) x) asFloat + ((wierzcholki at: 2) x) asFloat + ((wierzcholki at: 3) x) asFloat + ((wierzcholki at: 4) x) asFloat) / 4.
-    srodekY := (((wierzcholki at: 1) y) asFloat + ((wierzcholki at: 2) y) asFloat + ((wierzcholki at: 3) y) asFloat + ((wierzcholki at: 4) y) asFloat) / 4.
+    pole
+        "licz pole rombu"
+        | x y z |
+        x := (wierzcholki at: 2) x.
+        y := (wierzcholki at: 1) x.
+        z := ((x - y) abs) asFloat.
+        ^(z squared) * (kat sin).! 
 
-    wierzcholki at: 1 put: (((wierzcholki at: 1) x - srodekX) @ ((wierzcholki at: 1) y - srodekY)).
-    wierzcholki at: 2 put: (((wierzcholki at: 2) x - srodekX) @ ((wierzcholki at: 2) y - srodekY)).
-    wierzcholki at: 3 put: (((wierzcholki at: 3) x - srodekX) @ ((wierzcholki at: 3) y - srodekY)).
-    wierzcholki at: 4 put: (((wierzcholki at: 4) x - srodekX) @ ((wierzcholki at: 4) y - srodekY)).
- ! !
+    wysrodkuj
+        | srodekX srodekY przesuniecieX przesuniecieY |
+        
+        srodekX := (((wierzcholki at: 1) x) asFloat + ((wierzcholki at: 2) x) asFloat + ((wierzcholki at: 3) x) asFloat + ((wierzcholki at: 4) x) asFloat) / 4.
+        srodekY := (((wierzcholki at: 1) y) asFloat + ((wierzcholki at: 2) y) asFloat + ((wierzcholki at: 3) y) asFloat + ((wierzcholki at: 4) y) asFloat) / 4.
 
-!Romb methodsFor: 'initialize-release'!
+        wierzcholki at: 1 put: (((wierzcholki at: 1) x - srodekX) @ ((wierzcholki at: 1) y - srodekY)).
+        wierzcholki at: 2 put: (((wierzcholki at: 2) x - srodekX) @ ((wierzcholki at: 2) y - srodekY)).
+        wierzcholki at: 3 put: (((wierzcholki at: 3) x - srodekX) @ ((wierzcholki at: 3) y - srodekY)).
+        wierzcholki at: 4 put: (((wierzcholki at: 4) x - srodekX) @ ((wierzcholki at: 4) y - srodekY)).
+    ! !
 
-initialize: bok kat: nowyKat
-    "tworz romb o podanym boku i kacie"
+    !Romb methodsFor: 'initialize-release'!
 
-    super initialize: 4 name: 'Romb'.
+    initialize: bok kat: nowyKat
+        "tworz romb o podanym boku i kacie"
 
-	kat := nowyKat.
+        super initialize: 4 name: 'Romb'.
 
-    wierzcholki at: 2 put: bok@0.
-    wierzcholki at: 3 put: (bok + (bok * kat cos))@(bok * kat sin).
-    wierzcholki at: 4 put: (bok * kat cos)@(bok * kat sin).! !
+        kat := nowyKat.
 
+        wierzcholki at: 2 put: bok@0.
+        wierzcholki at: 3 put: (bok + (bok * kat cos))@(bok * kat sin).
+        wierzcholki at: 4 put: (bok * kat cos)@(bok * kat sin).! !
 
 
-Object subclass: #Okrag
-    instanceVariableNames: 'promien srodek '
-    classVariableNames: ''
-    poolDictionaries: ''
-    category: 'JezykiProgramowania'!
 
-!Okrag methodsFor: 'initialize-release'!
+    Object subclass: #Okrag
+        instanceVariableNames: 'promien srodek '
+        classVariableNames: ''
+        poolDictionaries: ''
+        category: 'JezykiProgramowania'!
 
-initialize: nowyPromien srodek: nowySrodek
-    "konstruktor obiektu - Okrag"
-    promien := nowyPromien.
-    srodek := nowySrodek.! !
+    !Okrag methodsFor: 'initialize-release'!
 
-!Okrag methodsFor: 'accessing'!
+    initialize: nowyPromien srodek: nowySrodek
+        "konstruktor obiektu - Okrag"
+        promien := nowyPromien.
+        srodek := nowySrodek.! !
 
-drukuj
-    "podaje promien i srodek kola"
-    "TODO wyswietlanie wysrodkuj"
-    Transcript show: 'Promien okregu: ', promien printString; cr.
-    Transcript show: 'Srodek okregu: ', srodek printString; cr.!
+    !Okrag methodsFor: 'accessing'!
 
-promien
-    "podaje promien Okregu"
-    ^promien!
+    drukuj
+        "podaje promien i srodek kola"
+        "TODO wyswietlanie wysrodkuj"
+        Transcript show: 'Promien okregu: ', promien printString; cr.
+        Transcript show: 'Srodek okregu: ', srodek printString; cr.!
 
-srodek
-    "podaje srodek Okregu"
-    ^srodek! !
+    promien
+        "podaje promien Okregu"
+        ^promien!
 
+    srodek
+        "podaje srodek Okregu"
+        ^srodek! !
 
 
-"Testowanie programu"
 
-"Punkt 1"
-Transcript show: 'Punkt 1', printString; cr.
+    "Testowanie programu"
 
-| romb area sideLength angleInRadians romb2 angle2|
+    "Punkt 1"
+    Transcript show: 'Punkt 1'; cr.
 
-sideLength := 2.
-angleInRadians := (60 degreesToRadians).  "Convert 45 degrees to radians"
-angle2 := (90 degreesToRadians).
-romb := Romb new initialize: sideLength kat:angleInRadians.
+    | romb area sideLength angleInRadians romb2 angle2|
 
-romb2 := Romb new initialize: sideLength kat:angleInRadians.
+    sideLength := 2.
+    angleInRadians := (60 degreesToRadians).  "Convert 45 degrees to radians"
+    angle2 := (90 degreesToRadians).
+    romb := Romb new initialize: sideLength kat:angleInRadians.
 
-area := romb pole.
-area2 := romb2 pole.
-romb3 := romb + romb2.
-area3 := romb3 pole.
-area12 := area + area2.
+    romb2 := Romb new initialize: sideLength kat:angleInRadians.
 
-Transcript show: 'Pole rombu1: ', area printString; cr.
-Transcript show: 'Pole rombu2: ', area2 printString; cr.
-Transcript show: 'Pole sumy rombow 1 i 2: ', area12 printString; cr.
-Transcript show: 'Pole rombu3: ', area3 printString; cr.
+    area := romb pole.
+    area2 := romb2 pole.
+    romb3 := romb + romb2.
+    area3 := romb3 pole.
+    area12 := area + area2.
 
-"Punkt 2"
-Transcript show: 'Punkt 2', printString; cr.
+    Transcript show: 'Pole rombu1: ', area printString; cr.
+    Transcript show: 'Pole rombu2: ', area2 printString; cr.
+    Transcript show: 'Pole sumy rombow 1 i 2: ', area12 printString; cr.
+    Transcript show: 'Pole rombu3: ', area3 printString; cr.
 
-| kwadrat1 |
-kwadrat1 := Kwadrat new initialize: 4.
-kwadrat1 drukuj.
-kwadrat1 wysrodkuj.
-kwadrat1 drukuj.
+    "Punkt 2"
+    Transcript show: 'Punkt 2'; cr.
 
-| romb4 |
-romb4 := Romb new initialize: 1 kat: angleInRadians. 
-romb4 wysrodkuj.
-romb4 drukuj.
+    | kwadrat1 |
+    kwadrat1 := Kwadrat new initialize: 4.
+    kwadrat1 drukuj.
+    kwadrat1 wysrodkuj.
+    kwadrat1 drukuj.
 
-"Punkt 3"
-Transcript show: 'Punkt 3', printString; cr.
+    | romb4 |
+    romb4 := Romb new initialize: 1 kat: angleInRadians. 
+    romb4 wysrodkuj.
+    romb4 drukuj.
 
-| square |
-square := Kwadrat new initialize: 4.
-square drukuj.
+    "Punkt 3"
+    Transcript show: 'Punkt 3'; cr.
 
-| romb3 |
-romb3 := Romb new initialize: sideLength kat:angleInRadians.
-romb3 drukuj.
+    | square |
+    square := Kwadrat new initialize: 4.
+    square drukuj.
 
-"Punkt 4"
-Transcript show: 'Punkt 4', printString; cr.
+    | romb3 |
+    romb3 := Romb new initialize: sideLength kat:angleInRadians.
+    romb3 drukuj.
 
-| circle radius center |
-radius := 2.
-center := 3@3.
+    "Punkt 4"
+    Transcript show: 'Punkt 4'; cr.
 
-circle := Okrag new initialize: radius srodek: center.
-circle drukuj.
+    | circle radius center |
+    radius := 2.
+    center := 3@3.
+
+    circle := Okrag new initialize: radius srodek: center.
+    circle drukuj.
+
+    "Punkt 5"
+    Transcript show: 'Punkt 5'; cr.
+    kwadrat1 := Kwadrat new initialize: 4.
+    kwadrat1 drukuj.
+    kwadrat1 opiszOkrag.
+
