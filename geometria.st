@@ -54,17 +54,7 @@
 
     !Kwadrat methodsFor: 'actions'!
 
-    pole
-        "licz pole kwadratu"
-
-        | x y z |
-        x := ((wierzcholki at: 2) x) asFloat.
-        y := ((wierzcholki at: 1) x) asFloat.
-        z := (x - y) abs.
-        ^ z squared.
-    !
-    
-    bok 
+     bok 
         "licz bok"
         | x y z |
         x := ((wierzcholki at: 2) x) asFloat.
@@ -73,11 +63,17 @@
         ^z
         
     !
+
+    pole
+        "licz pole kwadratu"
+        ^ self bok squared.
+    !
+    
+   
     wysrodkuj
         "przenosi figure do srodka ukladu wspolrzednych"
-        | polBoku x |
-        x := ((wierzcholki at: 2) x) asFloat.
-        polBoku := (x / 2.0) asFloat.
+        | polBoku |
+        polBoku := (self bok / 2.0) asFloat.
 
         wierzcholki at: 1 put: (polBoku @ (polBoku)*(-1)).
         wierzcholki at: 2 put: ((polBoku)*(-1) @ (polBoku)*(-1)).
