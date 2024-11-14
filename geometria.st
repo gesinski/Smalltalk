@@ -57,7 +57,20 @@ Wielokat subclass: #Kwadrat
 pole
 	"licz pole kwadratu"
 
-	^(wierzcholki at: 2) x squared! !
+	^(wierzcholki at: 2) x squared!
+
+wysrodkuj
+    "przenosi figure do srodka ukladu wspolrzednych"
+    | polBoku x |
+    x := ((wierzcholki at: 2) x) asFloat.
+    polBoku := (x / 2.0) asFloat.
+
+    wierzcholki at: 1 put: ((polBoku)*(-1) @ (polBoku)*(-1)).
+    wierzcholki at: 2 put: (polBoku @ (polBoku)*(-1)).
+    wierzcholki at: 3 put: (polBoku @ polBoku).
+    wierzcholki at: 4 put: ((polBoku)*(-1) @ polBoku).
+! !
+
 
 !Kwadrat methodsFor: 'initialize-release'!
 
@@ -142,6 +155,7 @@ srodek
 "Testowanie programu"
 
 "Punkt 1"
+Transcript show: 'Punkt 1', printString; cr.
 
 | romb area sideLength angleInRadians romb2 |
 
@@ -160,10 +174,20 @@ area12 := area + area2.
 
 Transcript show: 'Pole rombu1: ', area printString; cr.
 Transcript show: 'Pole rombu2: ', area2 printString; cr.
-Transcript show: 'Pole rombow 1 i 2: ', area12 printString; cr.
+Transcript show: 'Pole sumy rombow 1 i 2: ', area12 printString; cr.
 Transcript show: 'Pole rombu3: ', area3 printString; cr.
 
+"Punkt 2"
+Transcript show: 'Punkt 2', printString; cr.
+
+| kwadrat1 |
+kwadrat1 := Kwadrat new initialize: 4.
+kwadrat1 drukuj.
+kwadrat1 wysrodkuj.
+kwadrat1 drukuj.
+
 "Punkt 3"
+Transcript show: 'Punkt 3', printString; cr.
 
 | square |
 square := Kwadrat new initialize: 4.
@@ -174,6 +198,7 @@ romb3 := Romb new initialize: sideLength kat:angleInRadians.
 romb3 drukuj.
 
 "Punkt 4"
+Transcript show: 'Punkt 4', printString; cr.
 
 | circle radius center |
 radius := 2.
