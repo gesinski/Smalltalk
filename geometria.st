@@ -17,8 +17,8 @@ initialize: liczbaWierzcholkow name: nowaNazwa
 drukuj
 	"podaje wierzcholki i pole wielokata"
 	"TODO wyswietlanie wysrodkuj"
-	Transcript show: 'Polygon name: ', nazwa printString; cr.
-	Transcript show: 'Area of the polygon: ', (self pole) printString; cr.
+	Transcript show: 'Nazwa wielokata: ', nazwa printString; cr.
+	Transcript show: 'Pole wielokata: ', (self pole) printString; cr.
 	1 to: wierzcholki size do: [:i |
         Transcript show: 'Wierzcholek nr ', i printString, ': ', (wierzcholki at: i) printString; cr.
     ].!
@@ -112,7 +112,7 @@ Object subclass: #Okrag
     instanceVariableNames: 'promien srodek '
     classVariableNames: ''
     poolDictionaries: ''
-    category: 'ProgrammingLanguages'!
+    category: 'JezykiProgramowania'!
 
 !Okrag methodsFor: 'initialize-release'!
 
@@ -126,8 +126,8 @@ initialize: nowyPromien srodek: nowySrodek
 drukuj
     "podaje promien i srodek kola"
     "TODO wyswietlanie wysrodkuj"
-    Transcript show: 'Radius of the circle: ', promien printString; cr.
-    Transcript show: 'Center of the circle: ', srodek printString; cr.!
+    Transcript show: 'Promien okregu: ', promien printString; cr.
+    Transcript show: 'Srodek okregu: ', srodek printString; cr.!
 
 promien
     "podaje promien Okregu"
@@ -139,34 +139,31 @@ srodek
 
 
 
-"Testing the program"
+"Testowanie programu"
 
-"Point 1"
+"Punkt 1"
 
 | romb area sideLength angleInRadians romb2 |
 
-"Set the side length and angle (in radians)"
 sideLength := 2.
 angleInRadians := (30 degreesToRadians).  "Convert 45 degrees to radians"
 
-"Create a new Romb instance with the specified side length and angle"
 romb := Romb new initialize: sideLength kat:angleInRadians.
 
 romb2 := Romb new initialize: sideLength kat:angleInRadians.
 
-"Calculate the area of the rhombus"
 area := romb pole.
 area2 := romb2 pole.
 romb3 := romb + romb2.
 area3 := romb3 pole.
 area12 := area + area2.
-"Print the area"
-Transcript show: 'Area of the rhombus: ', area printString; cr.
-Transcript show: 'Area of the rhombus: ', area2 printString; cr.
-Transcript show: 'Area of the two(12) rhombus: ', area12 printString; cr.
-Transcript show: 'Area of the third rhombus: ', area3 printString; cr.
 
-"Point 3"
+Transcript show: 'Pole rombu1: ', area printString; cr.
+Transcript show: 'Pole rombu2: ', area2 printString; cr.
+Transcript show: 'Pole rombow 1 i 2: ', area12 printString; cr.
+Transcript show: 'Pole rombu3: ', area3 printString; cr.
+
+"Punkt 3"
 
 | square |
 square := Kwadrat new initialize: 4.
@@ -176,7 +173,7 @@ square drukuj.
 romb3 := Romb new initialize: sideLength kat:angleInRadians.
 romb3 drukuj.
 
-"Point 4"
+"Punkt 4"
 
 | circle radius center |
 radius := 2.
