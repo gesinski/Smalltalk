@@ -60,3 +60,65 @@ initialize: bok
 	wierzcholki at: 2 put: bok@0.
 	wierzcholki at: 3 put: bok@bok.
 	wierzcholki at: 4 put: 0@bok.! !
+
+
+
+Wielokat subclass: #Romb
+    instanceVariableNames: 'bok kat'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'JezykiProgramowania'!
+
+!Romb methodsFor: 'arithmetic'!
+
++ figura
+    "dodaj 2 figury w sensie pola"
+
+    | p |
+    p := self pole + figura pole.
+    ^(Romb new) initialize: (p / (kat sin)) sqrt kat: kat! !
+
+!Romb methodsFor: 'actions'!
+
+pole
+    "licz pole rombu"
+
+    ^((wierzcholki at: 2) x squared) * (kat sin)! !
+
+!Romb methodsFor: 'initialize-release'!
+
+initialize: bok kat: nowyKat
+    "tworz romb o podanym boku i kacie"
+
+    super initialize: 4 name: 'Romb'.
+
+	kat := nowyKat.
+
+    wierzcholki at: 2 put: bok@0.
+    wierzcholki at: 3 put: (bok + (bok * kat cos))@(bok * kat sin).
+    wierzcholki at: 4 put: (bok * kat cos)@(bok * kat sin).! !
+
+"Testing the program"
+
+| romb area sideLength angleInRadians romb2 |
+
+"Set the side length and angle (in radians)"
+sideLength := 2.
+angleInRadians := (30 degreesToRadians).  "Convert 45 degrees to radians"
+
+"Create a new Romb instance with the specified side length and angle"
+romb := Romb new initialize: sideLength kat:angleInRadians.
+
+romb2 := Romb new initialize: sideLength kat:angleInRadians.
+
+"Calculate the area of the rhombus"
+area := romb pole.
+area2 := romb2 pole.
+romb3 := romb + romb2.
+area3 := romb3 pole.
+area12 := area + area2.
+"Print the area"
+Transcript show: 'Area of the rhombus: ', area printString; cr.
+Transcript show: 'Area of the rhombus: ', area2 printString; cr.
+Transcript show: 'Area of the two(12) rhombus: ', area12 printString; cr.
+Transcript show: 'Area of the third rhombus: ', area3 printString; cr.
