@@ -54,14 +54,18 @@
 
     !Kwadrat methodsFor: 'actions'!
 
-     bok 
+    bok 
         "licz bok"
         | x y z |
         x := ((wierzcholki at: 2) x) asFloat.
         y := ((wierzcholki at: 1) x) asFloat.
         z := (x - y) abs.
-        ^z
-        
+        ^z.
+    !
+
+    przekatna
+        "licz przekatna"
+        ^(2 * self bok squared) sqrt.
     !
 
     pole
@@ -86,9 +90,9 @@
     opiszOkrag
         "Opisuje Okrag"
         | srodekOkrag okrag |
-        
+
         srodekOkrag := ((wierzcholki at: 1) + (wierzcholki at: 3)) / 2.
-        okragOpisany := Okrag new initialize: ((self bok / 2.0) asFloat) srodek: srodekOkrag.
+        okragOpisany := Okrag new initialize: ((self przekatna / 2.0) asFloat) srodek: srodekOkrag.
     !
     okragOpisany
     "zwraca obiekt okregu opisanego"
