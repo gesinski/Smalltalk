@@ -1,5 +1,5 @@
     Object subclass: #Wielokat
-        instanceVariableNames: 'wierzcholki nazwa '
+        instanceVariableNames: 'wierzcholki nazwa'
         classVariableNames: ''
         poolDictionaries: ''
         category: 'JezykiProgramowania'!
@@ -36,7 +36,7 @@
 
 
     Wielokat subclass: #Kwadrat
-        instanceVariableNames: ''
+        instanceVariableNames: 'okragOpisany'
         classVariableNames: ''
         poolDictionaries: ''
         category: 'JezykiProgramowania'!
@@ -63,25 +63,41 @@
         z := (x - y) abs.
         ^ z squared.
     !
+    
+    bok 
+        "licz bok"
+        | x y z |
+        x := ((wierzcholki at: 2) x) asFloat.
+        y := ((wierzcholki at: 1) x) asFloat.
+        z := (x - y) abs.
+        ^z
+        
+    !
     wysrodkuj
         "przenosi figure do srodka ukladu wspolrzednych"
         | polBoku x |
         x := ((wierzcholki at: 2) x) asFloat.
         polBoku := (x / 2.0) asFloat.
 
-        wierzcholki at: 1 put: ((polBoku)*(-1) @ (polBoku)*(-1)).
-        wierzcholki at: 2 put: (polBoku @ (polBoku)*(-1)).
+        wierzcholki at: 1 put: (polBoku @ (polBoku)*(-1)).
+        wierzcholki at: 2 put: ((polBoku)*(-1) @ (polBoku)*(-1)).
         wierzcholki at: 3 put: (polBoku @ polBoku).
         wierzcholki at: 4 put: ((polBoku)*(-1) @ polBoku).
+
+        self opiszOkrag.
     !
 
-        opiszOkrag
+    opiszOkrag
         "Opisuje Okrag"
         | srodekOkrag okrag |
         
         srodekOkrag := ((wierzcholki at: 1) + (wierzcholki at: 3)) / 2.
-        okrag := Okrag new initialize: (self pole) srodek: srodekOkrag.
-        okrag drukuj.
+        okragOpisany := Okrag new initialize: ((self bok / 2.0) asFloat) srodek: srodekOkrag.
+    !
+    okragOpisany
+    "zwraca obiekt okregu opisanego"
+
+    ^okragOpisany
     ! !
 
 
@@ -243,6 +259,13 @@
     "Punkt 5"
     Transcript show: 'Punkt 5'; cr.
     kwadrat1 := Kwadrat new initialize: 4.
+
+    Transcript show: 'Okrag Opisany na kwadracie: '; cr.
     kwadrat1 drukuj.
     kwadrat1 opiszOkrag.
-
+    (kwadrat1 okragOpisany) drukuj.
+    
+    Transcript show: 'Okrag Opisany na kwadracie po wyśrodkowaniu: '; cr.
+    kwadrat1 drukuj.
+    kwadrat1 wysrodkuj.
+    (kwadrat1 okragOpisany) drukuj.
