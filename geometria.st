@@ -57,8 +57,12 @@ Wielokat subclass: #Kwadrat
 pole
 	"licz pole kwadratu"
 
-	^(wierzcholki at: 2) x squared!
-
+    | x y z |
+    x := ((wierzcholki at: 2) x) asFloat.
+    y := ((wierzcholki at: 1) x) asFloat.
+    z := (x - y) abs.
+    ^ z squared.
+!
 wysrodkuj
     "przenosi figure do srodka ukladu wspolrzednych"
     | polBoku x |
@@ -69,7 +73,7 @@ wysrodkuj
     wierzcholki at: 2 put: (polBoku @ (polBoku)*(-1)).
     wierzcholki at: 3 put: (polBoku @ polBoku).
     wierzcholki at: 4 put: ((polBoku)*(-1) @ polBoku).
-! !
+! 
 
 
 !Kwadrat methodsFor: 'initialize-release'!
@@ -103,8 +107,23 @@ Wielokat subclass: #Romb
 
 pole
     "licz pole rombu"
+    | x y z |
+    x := (wierzcholki at: 2) x.
+    y := (wierzcholki at: 1) x.
+    z := ((x - y) abs) asFloat.
+    ^(z squared) * (kat sin).! 
 
-    ^((wierzcholki at: 2) x squared) * (kat sin)! !
+wysrodkuj
+    | srodekX srodekY przesuniecieX przesuniecieY |
+    
+    srodekX := (((wierzcholki at: 1) x) asFloat + ((wierzcholki at: 2) x) asFloat + ((wierzcholki at: 3) x) asFloat + ((wierzcholki at: 4) x) asFloat) / 4.
+    srodekY := (((wierzcholki at: 1) y) asFloat + ((wierzcholki at: 2) y) asFloat + ((wierzcholki at: 3) y) asFloat + ((wierzcholki at: 4) y) asFloat) / 4.
+
+    wierzcholki at: 1 put: (((wierzcholki at: 1) x - srodekX) @ ((wierzcholki at: 1) y - srodekY)).
+    wierzcholki at: 2 put: (((wierzcholki at: 2) x - srodekX) @ ((wierzcholki at: 2) y - srodekY)).
+    wierzcholki at: 3 put: (((wierzcholki at: 3) x - srodekX) @ ((wierzcholki at: 3) y - srodekY)).
+    wierzcholki at: 4 put: (((wierzcholki at: 4) x - srodekX) @ ((wierzcholki at: 4) y - srodekY)).
+ !
 
 !Romb methodsFor: 'initialize-release'!
 
@@ -157,11 +176,11 @@ srodek
 "Punkt 1"
 Transcript show: 'Punkt 1', printString; cr.
 
-| romb area sideLength angleInRadians romb2 |
+| romb area sideLength angleInRadians romb2 angle2|
 
 sideLength := 2.
-angleInRadians := (30 degreesToRadians).  "Convert 45 degrees to radians"
-
+angleInRadians := (60 degreesToRadians).  "Convert 45 degrees to radians"
+angle2 := (90 degreesToRadians).
 romb := Romb new initialize: sideLength kat:angleInRadians.
 
 romb2 := Romb new initialize: sideLength kat:angleInRadians.
@@ -196,6 +215,11 @@ square drukuj.
 | romb3 |
 romb3 := Romb new initialize: sideLength kat:angleInRadians.
 romb3 drukuj.
+
+| romb4 |
+romb4 := Romb new initialize: 1 kat: angleInRadians. 
+romb4 wysrodkuj.
+romb4 drukuj.
 
 "Punkt 4"
 Transcript show: 'Punkt 4', printString; cr.
