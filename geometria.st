@@ -73,7 +73,7 @@ wysrodkuj
     wierzcholki at: 2 put: (polBoku @ (polBoku)*(-1)).
     wierzcholki at: 3 put: (polBoku @ polBoku).
     wierzcholki at: 4 put: ((polBoku)*(-1) @ polBoku).
-! 
+! !
 
 
 !Kwadrat methodsFor: 'initialize-release'!
@@ -123,7 +123,7 @@ wysrodkuj
     wierzcholki at: 2 put: (((wierzcholki at: 2) x - srodekX) @ ((wierzcholki at: 2) y - srodekY)).
     wierzcholki at: 3 put: (((wierzcholki at: 3) x - srodekX) @ ((wierzcholki at: 3) y - srodekY)).
     wierzcholki at: 4 put: (((wierzcholki at: 4) x - srodekX) @ ((wierzcholki at: 4) y - srodekY)).
- !
+ ! !
 
 !Romb methodsFor: 'initialize-release'!
 
@@ -205,6 +205,11 @@ kwadrat1 drukuj.
 kwadrat1 wysrodkuj.
 kwadrat1 drukuj.
 
+| romb4 |
+romb4 := Romb new initialize: 1 kat: angleInRadians. 
+romb4 wysrodkuj.
+romb4 drukuj.
+
 "Punkt 3"
 Transcript show: 'Punkt 3', printString; cr.
 
@@ -215,11 +220,6 @@ square drukuj.
 | romb3 |
 romb3 := Romb new initialize: sideLength kat:angleInRadians.
 romb3 drukuj.
-
-| romb4 |
-romb4 := Romb new initialize: 1 kat: angleInRadians. 
-romb4 wysrodkuj.
-romb4 drukuj.
 
 "Punkt 4"
 Transcript show: 'Punkt 4', printString; cr.
