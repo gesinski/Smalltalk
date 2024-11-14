@@ -14,6 +14,14 @@ initialize: liczbaWierzcholkow name: nowaNazwa
 	wierzcholki at: 1 put: 0@0.! !
 
 !Wielokat methodsFor: 'accessing'!
+drukuj
+	"podaje wierzcholki i pole wielokata"
+	"TODO wyswietlanie wysrodkuj"
+	Transcript show: 'Polygon name: ', nazwa printString; cr.
+	Transcript show: 'Area of the polygon: ', (self pole) printString; cr.
+	1 to: wierzcholki size do: [:i |
+        Transcript show: 'Wierzcholek nr ', i printString, ': ', (wierzcholki at: i) printString; cr.
+    ].!
 
 nazwa
 	"podaje nazwe wielokata"
@@ -100,6 +108,8 @@ initialize: bok kat: nowyKat
 
 "Testing the program"
 
+"Point 1"
+
 | romb area sideLength angleInRadians romb2 |
 
 "Set the side length and angle (in radians)"
@@ -122,3 +132,13 @@ Transcript show: 'Area of the rhombus: ', area printString; cr.
 Transcript show: 'Area of the rhombus: ', area2 printString; cr.
 Transcript show: 'Area of the two(12) rhombus: ', area12 printString; cr.
 Transcript show: 'Area of the third rhombus: ', area3 printString; cr.
+
+"Point 2"
+
+| square |
+square := Kwadrat new initialize: 4.
+square drukuj.
+
+| romb3 |
+romb3 := Romb new initialize: sideLength kat:angleInRadians.
+romb3 drukuj.
