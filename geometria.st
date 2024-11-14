@@ -106,6 +106,39 @@ initialize: bok kat: nowyKat
     wierzcholki at: 3 put: (bok + (bok * kat cos))@(bok * kat sin).
     wierzcholki at: 4 put: (bok * kat cos)@(bok * kat sin).! !
 
+
+
+Object subclass: #Okrag
+    instanceVariableNames: 'promien srodek '
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'ProgrammingLanguages'!
+
+!Okrag methodsFor: 'initialize-release'!
+
+initialize: nowyPromien srodek: nowySrodek
+    "konstruktor obiektu - Okrag"
+    promien := nowyPromien.
+    srodek := nowySrodek.! !
+
+!Okrag methodsFor: 'accessing'!
+
+drukuj
+    "podaje promien i srodek kola"
+    "TODO wyswietlanie wysrodkuj"
+    Transcript show: 'Radius of the circle: ', promien printString; cr.
+    Transcript show: 'Center of the circle: ', srodek printString; cr.!
+
+promien
+    "podaje promien Okregu"
+    ^promien!
+
+srodek
+    "podaje srodek Okregu"
+    ^srodek! !
+
+
+
 "Testing the program"
 
 "Point 1"
@@ -133,7 +166,7 @@ Transcript show: 'Area of the rhombus: ', area2 printString; cr.
 Transcript show: 'Area of the two(12) rhombus: ', area12 printString; cr.
 Transcript show: 'Area of the third rhombus: ', area3 printString; cr.
 
-"Point 2"
+"Point 3"
 
 | square |
 square := Kwadrat new initialize: 4.
@@ -142,3 +175,12 @@ square drukuj.
 | romb3 |
 romb3 := Romb new initialize: sideLength kat:angleInRadians.
 romb3 drukuj.
+
+"Point 4"
+
+| circle radius center |
+radius := 2.
+center := 3@3.
+
+circle := Okrag new initialize: radius srodek: center.
+circle drukuj.
