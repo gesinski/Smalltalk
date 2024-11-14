@@ -109,7 +109,9 @@
         super initialize: 4 name: 'Kwadrat'.
         wierzcholki at: 2 put: bok@0.
         wierzcholki at: 3 put: bok@bok.
-        wierzcholki at: 4 put: 0@bok.! !
+        wierzcholki at: 4 put: 0@bok.
+        okragOpisany := nil.
+    ! !
 
 
 
