@@ -116,7 +116,7 @@
 
 
     Wielokat subclass: #Romb
-        instanceVariableNames: 'bok kat'
+        instanceVariableNames: 'kat okragOpisany'
         classVariableNames: ''
         poolDictionaries: ''
         category: 'JezykiProgramowania'!
@@ -140,6 +140,21 @@
         z := ((x - y) abs) asFloat.
         ^(z squared) * (kat sin).! 
 
+    bok 
+        "licz bok"
+        | x y z |
+        x := ((wierzcholki at: 2) x) asFloat.
+        y := ((wierzcholki at: 1) x) asFloat.
+        z := (x - y) abs.
+        ^z.
+    !
+    
+    przekatna
+        "licz przekatna"
+        ^(2 * self bok squared) sqrt.
+    !
+
+
     wysrodkuj
         | srodekX srodekY przesuniecieX przesuniecieY |
         
@@ -150,6 +165,23 @@
         wierzcholki at: 2 put: (((wierzcholki at: 2) x - srodekX) @ ((wierzcholki at: 2) y - srodekY)).
         wierzcholki at: 3 put: (((wierzcholki at: 3) x - srodekX) @ ((wierzcholki at: 3) y - srodekY)).
         wierzcholki at: 4 put: (((wierzcholki at: 4) x - srodekX) @ ((wierzcholki at: 4) y - srodekY)).
+
+        self opiszOkrag.
+    !
+    opiszOkrag
+        "Opisuje Okrag"
+        (kat - (Float pi / 2)) abs < 0.0001 ifTrue: [ 
+            | srodekOkrag okrag |
+
+            srodekOkrag := ((wierzcholki at: 1) + (wierzcholki at: 3)) / 2.
+            okragOpisany := Okrag new initialize: ((self przekatna / 2.0) asFloat) srodek: srodekOkrag.
+         ].
+        
+    !
+    okragOpisany
+    "zwraca obiekt okregu opisanego"
+
+    ^okragOpisany
     ! !
 
     !Romb methodsFor: 'initialize-release'!
@@ -160,10 +192,11 @@
         super initialize: 4 name: 'Romb'.
 
         kat := nowyKat.
-
         wierzcholki at: 2 put: bok@0.
         wierzcholki at: 3 put: (bok + (bok * kat cos))@(bok * kat sin).
-        wierzcholki at: 4 put: (bok * kat cos)@(bok * kat sin).! !
+        wierzcholki at: 4 put: (bok * kat cos)@(bok * kat sin).
+        okragOpisany := nil.
+    ! !
 
 
 
@@ -259,6 +292,7 @@
     circle drukuj.
 
     "Punkt 5"
+    | romb5 |
     Transcript show: 'Punkt 5'; cr.
     kwadrat1 := Kwadrat new initialize: 4.
 
@@ -268,6 +302,18 @@
     (kwadrat1 okragOpisany) drukuj.
     
     Transcript show: 'Okrag Opisany na kwadracie po wyśrodkowaniu: '; cr.
-    kwadrat1 drukuj.
     kwadrat1 wysrodkuj.
+    kwadrat1 drukuj.
     (kwadrat1 okragOpisany) drukuj.
+
+    romb5 := Romb new initialize: 4 kat:angle2.
+
+    Transcript show: 'Okrag Opisany robmie bedącym kwadratem: '; cr.
+    romb5 drukuj.
+    romb5 opiszOkrag.
+    (romb5 okragOpisany) drukuj.
+
+    Transcript show: 'Okrag Opisany robmie bedącym kwadratem: po wyśrodkowaniu: '; cr.
+    romb5 wysrodkuj.
+    romb5 drukuj.
+    (romb5 okragOpisany) drukuj.
