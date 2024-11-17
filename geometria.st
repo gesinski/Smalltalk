@@ -95,9 +95,9 @@
         okragOpisany := Okrag new initialize: ((self przekatna / 2.0) asFloat) srodek: srodekOkrag.
     !
     okragOpisany
-    "zwraca obiekt okregu opisanego"
+        "zwraca obiekt okregu opisanego"
 
-    ^okragOpisany
+        ^okragOpisany
     ! !
 
 
@@ -179,9 +179,9 @@
         
     !
     okragOpisany
-    "zwraca obiekt okregu opisanego"
+        "zwraca obiekt okregu opisanego"
 
-    ^okragOpisany
+        ^okragOpisany
     ! !
 
     !Romb methodsFor: 'initialize-release'!
@@ -215,20 +215,26 @@
 
     !Okrag methodsFor: 'accessing'!
 
-    drukuj
-        "podaje promien i srodek kola"
-        "TODO wyswietlanie wysrodkuj"
-        Transcript show: 'Promien okregu: ', promien printString; cr.
-        Transcript show: 'Srodek okregu: ', srodek printString; cr.!
+        drukuj
+            "podaje promien i srodek kola"
+            "TODO wyswietlanie wysrodkuj"
+            Transcript show: 'Promien okregu: ', promien printString; cr.
+            Transcript show: 'Srodek okregu: ', srodek printString; cr.
+            Transcript show: 'Pole okregu: ', (self pole) printString; cr.!
 
-    promien
-        "podaje promien Okregu"
-        ^promien!
+        promien
+            "podaje promien Okregu"
+            ^promien!
 
-    srodek
-        "podaje srodek Okregu"
-        ^srodek! !
+        srodek
+            "podaje srodek Okregu"
+            ^srodek! !
 
+    !Okrag methodsFor: 'arithmetic'!
+        pole
+            "licz pole okregu"
+            ^ (self promien squared) * Float pi.
+        ! !
 
 
     "Testowanie programu"
