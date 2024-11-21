@@ -16,7 +16,6 @@
     !Wielokat methodsFor: 'accessing'!
     drukuj
         "podaje wierzcholki i pole wielokata"
-        "TODO wyswietlanie wysrodkuj"
         Transcript show: 'Nazwa wielokata: ', nazwa printString; cr.
         Transcript show: 'Pole wielokata: ', (self pole) printString; cr.
         1 to: wierzcholki size do: [:i |
@@ -217,7 +216,6 @@
 
         drukuj
             "podaje promien i srodek kola"
-            "TODO wyswietlanie wysrodkuj"
             Transcript show: 'Promien okregu: ', promien printString; cr.
             Transcript show: 'Srodek okregu: ', srodek printString; cr.
             Transcript show: 'Pole okregu: ', (self pole) printString; cr.!
@@ -245,7 +243,7 @@
     | romb area sideLength angleInRadians romb2 angle2|
 
     sideLength := 2.
-    angleInRadians := (60 degreesToRadians).  "Convert 45 degrees to radians"
+    angleInRadians := (60 degreesToRadians).
     angle2 := (90 degreesToRadians).
     romb := Romb new initialize: sideLength kat:angleInRadians.
 
